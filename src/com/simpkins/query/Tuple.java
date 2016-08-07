@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 public class Tuple<T1, T2> {
     private T1 item1;

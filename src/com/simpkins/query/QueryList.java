@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -8,86 +8,86 @@ import java.util.*;
 import java.util.function.*;
 
 /**
- * QuerySet is an extension of LinkedHashSet with extra features including convenient access to most Query methods.
+ * QueryList is an extension of ArrayList with extra features including convenient access to most Query methods.
  */
 @SuppressWarnings({"UnusedDeclaration", "Convert2Diamond"})
-public class QuerySet<T> extends LinkedHashSet<T> {
+public class QueryList<T> extends ArrayList<T> {
 
     //
     // Constructors
     //
 
-    public QuerySet() {
+    public QueryList() {
     }
 
     @SafeVarargs
-    public QuerySet(T... items) {
+    public QueryList(T... items) {
         super(items.length);
         addAll(Arrays.asList(items));
     }
 
     // This constructor can be inefficient if the iterable is very large due to the inability to set an initial
-    // capacity for the QuerySet.
-    public QuerySet(Iterable<? extends T> items) {
+    // capacity for the QueryList.
+    public QueryList(Iterable<? extends T> items) {
         addAll(items);
     }
 
-    public QuerySet(Collection<? extends T> items) {
+    public QueryList(Collection<? extends T> items) {
         super(items);
     }
 
     // Java params doesn't work well with primitive arrays, so there is a specific constructor for each.
 
-    public QuerySet(boolean[] items) {
+    public QueryList(boolean[] items) {
         super(items.length);
         for (Boolean item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(byte[] items) {
+    public QueryList(byte[] items) {
         super(items.length);
         for (Byte item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(short[] items) {
+    public QueryList(short[] items) {
         super(items.length);
         for (Short item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(int[] items) {
+    public QueryList(int[] items) {
         super(items.length);
         for (Integer item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(long[] items) {
+    public QueryList(long[] items) {
         super(items.length);
         for (Long item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(float[] items) {
+    public QueryList(float[] items) {
         super(items.length);
         for (Float item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(double[] items) {
+    public QueryList(double[] items) {
         super(items.length);
         for (Double item : items)
             //noinspection unchecked
             add((T)item);
     }
 
-    public QuerySet(char[] items) {
+    public QueryList(char[] items) {
         super(items.length);
         for (Character item : items)
             //noinspection unchecked
@@ -99,72 +99,72 @@ public class QuerySet<T> extends LinkedHashSet<T> {
     //
 
     @SafeVarargs
-    public static <T> QuerySet<T> of(T... items) {
-        return new QuerySet<T>(items);
+    public static <T> QueryList<T> of(T... items) {
+        return new QueryList<T>(items);
     }
 
     // This constructor can be inefficient if the iterable is very large due to the inability to set an initial
-    // capacity for the QuerySet.
-    public static <T> QuerySet<T> of(Iterable<? extends T> source) {
-        return new QuerySet<T>(source);
+    // capacity for the QueryList.
+    public static <T> QueryList<T> of(Iterable<? extends T> source) {
+        return new QueryList<T>(source);
     }
 
-    public static <T> QuerySet<T> of(Collection<? extends T> source) {
-        return new QuerySet<T>(source);
+    public static <T> QueryList<T> of(Collection<? extends T> source) {
+        return new QueryList<T>(source);
     }
 
     // Java params doesn't work well with primitive arrays, so there is a specific constructor for each.
 
-    public static QuerySet<Boolean> of(boolean[] items) {
-        return new QuerySet<Boolean>(items);
+    public static QueryList<Boolean> of(boolean[] items) {
+        return new QueryList<Boolean>(items);
     }
 
-    public static QuerySet<Byte> of(byte[] items) {
-        return new QuerySet<Byte>(items);
+    public static QueryList<Byte> of(byte[] items) {
+        return new QueryList<Byte>(items);
     }
 
-    public static QuerySet<Short> of(short[] items) {
-        return new QuerySet<Short>(items);
+    public static QueryList<Short> of(short[] items) {
+        return new QueryList<Short>(items);
     }
 
-    public static QuerySet<Integer> of(int[] items) {
-        return new QuerySet<Integer>(items);
+    public static QueryList<Integer> of(int[] items) {
+        return new QueryList<Integer>(items);
     }
 
-    public static QuerySet<Long> of(long[] items) {
-        return new QuerySet<Long>(items);
+    public static QueryList<Long> of(long[] items) {
+        return new QueryList<Long>(items);
     }
 
-    public static QuerySet<Float> of(float[] items) {
-        return new QuerySet<Float>(items);
+    public static QueryList<Float> of(float[] items) {
+        return new QueryList<Float>(items);
     }
 
-    public static QuerySet<Double> of(double[] items) {
-        return new QuerySet<Double>(items);
+    public static QueryList<Double> of(double[] items) {
+        return new QueryList<Double>(items);
     }
 
-    public static QuerySet<Character> of(char[] items) {
-        return new QuerySet<Character>(items);
+    public static QueryList<Character> of(char[] items) {
+        return new QueryList<Character>(items);
     }
 
     // Uses reflection to set the initial capacity.  This is a work around due to the problem of having a params
-    // constructor for an Integer typed QuerySet.
-    public static <T> QuerySet<T> initialCapacity(int value) {
+    // constructor for an Integer typed QueryList.
+    public static <T> QueryList<T> initialCapacity(int value) {
         if (value < 0)
             throw new IllegalArgumentException("Illegal Capacity: " + value);
-        QuerySet<T> set = new QuerySet<T>();
+        QueryList<T> list = new QueryList<T>();
         try {
-            Field map = set.getClass().getSuperclass().getSuperclass().getDeclaredField("map");
-            map.setAccessible(true);
-            map.set(set, new LinkedHashMap<>(value, .75f));
+            Field elementData = list.getClass().getSuperclass().getDeclaredField("elementData");
+            elementData.setAccessible(true);
+            elementData.set(list, new Object[value]);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        return set;
+        return list;
     }
 
     //
-    // Extra Set Methods
+    // Extra List Methods
     //
 
     /**
@@ -176,32 +176,54 @@ public class QuerySet<T> extends LinkedHashSet<T> {
     }
 
     /**
-     * Overload of the addAll() that takes an iterable.
+     * Overload of the addAll() that takes an iterable.  This can be inefficient if the iterable is very large due to
+     * the inability to set a new capacity for QueryList.
      */
     public boolean addAll(Iterable<? extends T> items) {
         return addAll(Query.from(items).toList());
     }
 
     /**
-     * Returns this QuerySet if not empty or the alternates if empty.
+     * Returns the item at the provided index or null if the index is out of range.
+     */
+    public T getOrNull(int index) {
+        return getOr(index, null);
+    }
+
+    /**
+     * Returns the item at the provided index or null if the index is out of range, wrapped in an optional
+     */
+    public Optional<T> getOptional(int index) {
+        return Optional.ofNullable(getOrNull(index));
+    }
+
+    /**
+     * Returns the item at the provided index or the alternate if the index is out of range.
+     */
+    public T getOr(int index, T alternate) {
+        return size() > index ? get(index) : alternate;
+    }
+
+    /**
+     * Returns this QueryList if not empty or the alternates if empty.
      */
     @SafeVarargs
-    public final QuerySet<T> orIfEmpty(T... alternates) {
+    public final QueryList<T> orIfEmpty(T... alternates) {
         return orIfEmpty(Arrays.asList(alternates));
     }
 
     /**
-     * Returns this QuerySet if not empty or the alternates if empty.
+     * Returns this QueryList if not empty or the alternates if empty.
      */
-    public QuerySet<T> orIfEmpty(Iterable<? extends T> alternates) {
+    public QueryList<T> orIfEmpty(Iterable<? extends T> alternates) {
         if (!isEmpty())
             return this;
         Integer size = Query.findSize(alternates);
-        QuerySet<T> set = size != null
-                ? QuerySet.initialCapacity(((Collection)alternates).size())
-                : new QuerySet<T>();
-        set.addAll(alternates);
-        return set;
+        QueryList<T> list = size != null
+                ? QueryList.initialCapacity(((Collection)alternates).size())
+                : new QueryList<T>();
+        list.addAll(alternates);
+        return list;
     }
 
     //
@@ -1028,7 +1050,7 @@ public class QuerySet<T> extends LinkedHashSet<T> {
     //
 
     /**
-     * Wraps the QuerySet in a Query.
+     * Wraps the QueryList in a Query.
      */
     public Query<T> query() {
         return new Query<T>(this);
@@ -1101,17 +1123,17 @@ public class QuerySet<T> extends LinkedHashSet<T> {
     }
 
     /**
-     * Returns the query result as a QueryList.
-     */
-    public QueryList<T> toList() {
-        return new QueryList<T>(this);
-    }
-
-    /**
      * Returns the query result as a QueryList of the provided type.
      */
     public <S> QueryList<S> toList(Class<S> type) {
         return query().toList(type);
+    }
+
+    /**
+     * Returns the query result as a QuerySet.
+     */
+    public QuerySet<T> toSet() {
+        return new QuerySet<T>(this);
     }
 
     /**
@@ -1263,7 +1285,7 @@ public class QuerySet<T> extends LinkedHashSet<T> {
      */
     public T lastOr(Predicate<T> condition, T alternate) {
         for (int i = size() - 1; i >= 0; i--) {
-            T item = elementAt(i);
+            T item = get(i);
             if (condition.test(item))
                 return item;
         }
@@ -1333,34 +1355,6 @@ public class QuerySet<T> extends LinkedHashSet<T> {
      */
     public T singleOr(Predicate<T> condition, T alternate) {
         return query().singleOr(condition, alternate);
-    }
-
-    /**
-     * Returns the result at the provided index, or an IndexOutOfBoundsException is thrown if the index is out of range.
-     */
-    public T elementAt(int index) {
-        return query().elementAt(index);
-    }
-
-    /**
-     * Returns the result at the provided index or null if the index is out of range.
-     */
-    public T elementAtOrNull(int index) {
-        return query().elementAtOrNull(index);
-    }
-
-    /**
-     * Returns the result at the provided index or null if the index is out of range, wrapped in an optional.
-     */
-    public Optional<T> elementAtOptional(int index) {
-        return query().elementAtOptional(index);
-    }
-
-    /**
-     * Returns the result at the provided index or the alternate if the index is out of range.
-     */
-    public T elementAtOr(int index, T alternate) {
-        return query().elementAtOr(index, alternate);
     }
 
     //
@@ -1640,6 +1634,6 @@ public class QuerySet<T> extends LinkedHashSet<T> {
 
     @Override
     public String toString() {
-        return "QuerySet{size=" + size() + ", values=" + super.toString() + "}";
+        return "QueryList{size=" + size() + ", values=" + super.toString() + "}";
     }
 }

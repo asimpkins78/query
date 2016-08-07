@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 import java.util.Random;
 

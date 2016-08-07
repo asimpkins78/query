@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 public class QueryMapping<K, V> {
     private K key;

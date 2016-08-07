@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 public class Triple<T1, T2, T3> {
     private T1 item1;

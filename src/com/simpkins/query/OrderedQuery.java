@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 import simpkins.query.iterator.OrderByIterator;
 

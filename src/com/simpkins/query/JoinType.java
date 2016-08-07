@@ -1,4 +1,4 @@
-package simpkins.query;
+package com.simpkins.query;
 
 public enum JoinType {
     INNER, LEFT, RIGHT, OUTER;
