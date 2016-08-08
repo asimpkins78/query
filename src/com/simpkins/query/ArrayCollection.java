@@ -1,6 +1,6 @@
 package com.simpkins.query;
 
-import simpkins.query.iterator.ArrayIterator;
+import com.simpkins.query.iterator.ArrayIterator;
 
 import java.util.AbstractCollection;
 import java.util.Iterator;

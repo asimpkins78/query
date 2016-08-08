@@ -1,7 +1,7 @@
-package simpkins.query.iterator;
+package com.simpkins.query.iterator;
 
-import simpkins.query.JoinType;
-import simpkins.query.Tuple;
+import com.simpkins.query.JoinType;
+import com.simpkins.query.Tuple;
 
 import java.util.*;
 import java.util.function.BiPredicate;

@@ -1,6 +1,6 @@
 package com.simpkins.query;
 
-import simpkins.query.iterator.*;
+import com.simpkins.query.iterator.*;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
