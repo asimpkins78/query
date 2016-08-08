@@ -1,4 +1,4 @@
-package simpkins.query.iterator;
+package com.simpkins.query.iterator;
 
 import java.util.*;
 import java.util.function.BiPredicate;

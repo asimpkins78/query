@@ -1,6 +1,6 @@
-package simpkins.query.iterator;
+package com.simpkins.query.iterator;
 
-import simpkins.query.QueryGrouping;
+import com.simpkins.query.QueryGrouping;
 
 import java.util.*;
 import java.util.function.Function;

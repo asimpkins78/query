@@ -1,6 +1,6 @@
 package com.simpkins.query;
 
-import simpkins.query.iterator.OrderByIterator;
+import com.simpkins.query.iterator.OrderByIterator;
 
 import java.util.*;
 import java.util.function.Consumer;
