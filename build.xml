@@ -2,7 +2,7 @@
 <project name="simpkins-query" default="all">
   
   
-  <property file="simpkins-query.properties"/>
+  <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -90,18 +90,6 @@
   <property name="project.jdk.home" value="${jdk.home.1.8}"/>
   <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
   <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -160,15 +148,15 @@
   
   <target name="compile.module.simpkins-query" depends="compile.module.simpkins-query.production,compile.module.simpkins-query.tests" description="Compile module simpkins-query"/>
   
-  <target name="compile.module.simpkins-query.production" depends="register.custom.compilers" description="Compile module simpkins-query; production classes">
+  <target name="compile.module.simpkins-query.production" description="Compile module simpkins-query; production classes">
     <mkdir dir="${simpkins-query.output.dir}"/>
-    <javac2 destdir="${simpkins-query.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.simpkins-query}/javac">
+    <javac destdir="${simpkins-query.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.simpkins-query}/javac">
       <compilerarg line="${compiler.args.simpkins-query}"/>
       <bootclasspath refid="simpkins-query.module.bootclasspath"/>
       <classpath refid="simpkins-query.module.production.classpath"/>
       <src refid="simpkins-query.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.simpkins-query"/>
-    </javac2>
+    </javac>
     
     <copy todir="${simpkins-query.output.dir}">
       <fileset dir="${module.simpkins-query.basedir}/src">
@@ -178,7 +166,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.simpkins-query.tests" depends="register.custom.compilers,compile.module.simpkins-query.production" description="compile module simpkins-query; test classes" unless="skip.tests"/>
+  <target name="compile.module.simpkins-query.tests" depends="compile.module.simpkins-query.production" description="compile module simpkins-query; test classes" unless="skip.tests"/>
   
   <target name="clean.module.simpkins-query" description="cleanup module">
     <delete dir="${simpkins-query.output.dir}"/>
