@@ -56,41 +56,6 @@
     <exclude name="**/?*.aj"/>
   </patternset>
   
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
-  <path id="jdk.classpath.1.8">
-    <fileset dir="${jdk.home.1.8}">
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/ext/access-bridge-32.jar"/>
-      <include name="jre/lib/ext/cldrdata.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/jaccess.jar"/>
-      <include name="jre/lib/ext/jfxrt.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/nashorn.jar"/>
-      <include name="jre/lib/ext/sunec.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunmscapi.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/zipfs.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jfr.jar"/>
-      <include name="jre/lib/jfxswt.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/rt.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
-  
   <!-- Modules -->
   
   
@@ -99,9 +64,6 @@
   <dirname property="module.simpkins-query.basedir" file="${ant.file}"/>
   
   
-  <property name="module.jdk.home.simpkins-query" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.simpkins-query" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.simpkins-query" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.simpkins-query" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
   
@@ -112,16 +74,13 @@
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
   
-  <path id="simpkins-query.module.production.classpath">
-    <path refid="${module.jdk.classpath.simpkins-query}"/>
-  </path>
+  <path id="simpkins-query.module.production.classpath"/>
   
   <path id="simpkins-query.runtime.production.module.classpath">
     <pathelement location="${simpkins-query.output.dir}"/>
   </path>
   
   <path id="simpkins-query.module.classpath">
-    <path refid="${module.jdk.classpath.simpkins-query}"/>
     <pathelement location="${simpkins-query.output.dir}"/>
   </path>
   
@@ -150,7 +109,7 @@
   
   <target name="compile.module.simpkins-query.production" description="Compile module simpkins-query; production classes">
     <mkdir dir="${simpkins-query.output.dir}"/>
-    <javac destdir="${simpkins-query.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.simpkins-query}/javac">
+    <javac destdir="${simpkins-query.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.simpkins-query}"/>
       <bootclasspath refid="simpkins-query.module.bootclasspath"/>
       <classpath refid="simpkins-query.module.production.classpath"/>
