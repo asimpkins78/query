@@ -1185,7 +1185,7 @@ public class QuerySet<T> extends LinkedHashSet<T> {
      * in an Optional.
      */
     public Optional<T> firstOptional(Predicate<T> condition) {
-        return query().firstOptional();
+        return query().firstOptional(condition);
     }
 
     /**
@@ -1300,7 +1300,7 @@ public class QuerySet<T> extends LinkedHashSet<T> {
      * than one result is found a NonUniqueResultException exception is thrown.
      */
     public T singleOrNull(Predicate<T> condition) {
-        return query().singleOrNull();
+        return query().singleOrNull(condition);
     }
 
     /**

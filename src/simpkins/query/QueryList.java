@@ -1207,7 +1207,7 @@ public class QueryList<T> extends ArrayList<T> {
      * in an Optional.
      */
     public Optional<T> firstOptional(Predicate<T> condition) {
-        return query().firstOptional();
+        return query().firstOptional(condition);
     }
 
     /**
@@ -1322,7 +1322,7 @@ public class QueryList<T> extends ArrayList<T> {
      * than one result is found a NonUniqueResultException exception is thrown.
      */
     public T singleOrNull(Predicate<T> condition) {
-        return query().singleOrNull();
+        return query().singleOrNull(condition);
     }
 
     /**
